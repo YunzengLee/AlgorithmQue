@@ -162,8 +162,40 @@ class Solution_mianshi_60:
             res[i] = f[n][n+i]/((6**n))
         return res
 
+# leetcode 10  正则匹配 测试中
+class Solution_xxx:
+    def ifMatch(self, s, p):
+        dp = [[False for _ in range(len(p)+1)] for _ in range(len(s)+1)]
+        dp[0][0] = True
+        # for i in range(1, len(s)+1):
+        #     dp[i][0] = False
+        for i in range(1,len(p)+1):
+            if i % 2 == 0:
+                if p[i-1] == '*':
+                    dp[0][i] = dp[0][i-2]
+        for i in range(1, len(s)+1):
+            for j in range(1,len(p)+1):
+                if p[j-1] != '*':
+                    if p[j-1] == '.' or p[j-1] == s[i-1]:
+                        dp[i][j] = dp[i-1][j-1]
+                else:
+                    if p[j-2] == '.': # *前面是.
+                        for k in range(i,-1,-1):
+                            if dp[k][j-2]:
+                                dp[i][j] = True
+                                break
+                    else: # *前面是字母
+                        dp[i][j] = dp[i][j-2]
+                        k = i
+                        while k>0 and s[k-1] == p[j-2]:
+                            if dp[k-1][j-2]:
+                                dp[i][j] = True
+                                break
+                            k -= 1
+        return dp[-1][-1]
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
     import re
     s = '123sdef#21(de'
     nums = re.findall(r'\d+', s)

@@ -1572,3 +1572,30 @@ if __name__ == '__main__':
     res = []
     heapq.heappush(res, 1)
     print(res)
+
+    def test(arr,k):
+        if len(arr)<=k:
+            return arr
+        start = 0
+        end = len(arr) - 1
+        def fastsort(start,end,arr,k):
+            left = start
+            right = end
+            key = arr[start]
+            while left < right:
+                while left< right and arr[right]>=key:
+                    right -=1
+                arr[left] = arr[right]
+                while left<right and arr[left] <= key:
+                    left+=1
+                arr[right] = arr[left]
+            arr[left] = key
+            if left + 1 == k:
+                return arr[:left+1]
+            elif left+1<k:
+                return fastsort(left+1,end,arr,k)
+            else:
+                return fastsort(start,left-1,arr,k)
+        return fastsort(start,end,arr,k)
+
+
