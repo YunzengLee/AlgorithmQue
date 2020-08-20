@@ -257,9 +257,16 @@ class Solution_stoneMerge:
         dp[0] = True
         print(dp)
         n = len(stone)
+        # stone.sort()  # 不必排序，因为先使用和后使用哪个石头是没有区别的，因为结果只跟他们的和有关
         for i in range(n):
-            for j in range(stone_sum // 2, stone[i] - 1, -1):
+            for j in range(stone_sum // 2, stone[i] - 1, -1):  # 必须从高到低遍历，否则如下行代码
                 dp[j] = dp[j - stone[i]] or dp[j]
+            # for j in range(stone[i], len(dp)):  # 这样写的话，在一个i的for循环中，会出现一个stone[i]被使用多次的情况
+            #     print(j)
+            #     dp[j] = dp[j - stone[i]] or dp[j]
+                print(dp)
+            print('#')
+
         print(dp)
         res = float('inf')
         for j in range(stone_sum // 2, -1, -1):
@@ -278,4 +285,4 @@ if __name__ == '__main__':
     # print(character)
     #
     a = Solution_stoneMerge()
-    a.stoneMerge([2, 4, 5, 7])
+    a.stoneMerge([2,  5, 4, 7])
