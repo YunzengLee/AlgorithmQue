@@ -261,9 +261,9 @@ class Solution_stoneMerge:
         for i in range(n):
             for j in range(stone_sum // 2, stone[i] - 1, -1):  # 必须从高到低遍历，否则如下行代码
                 dp[j] = dp[j - stone[i]] or dp[j]
-            # for j in range(stone[i], len(dp)):  # 这样写的话，在一个i的for循环中，会出现一个stone[i]被使用多次的情况
-            #     print(j)
-            #     dp[j] = dp[j - stone[i]] or dp[j]
+                # for j in range(stone[i], len(dp)):  # 这样写的话，在一个i的for循环中，会出现一个stone[i]被使用多次的情况
+                #     print(j)
+                #     dp[j] = dp[j - stone[i]] or dp[j]
                 print(dp)
             print('#')
 
@@ -275,6 +275,67 @@ class Solution_stoneMerge:
         return res
 
 
+'''区间型'''
+
+
+class Solution_coinMerge:
+    """
+    N堆金币排成一排（数组），第i堆有c【i】个金币，每次将相邻的两堆金币合并，合并成本为两堆金币之和，经过N-1次合并后合并为一堆，求最小成本
+    """
+
+    def mergeCoin(self, coins):
+        """
+        令dp[i][j]表示将第i到j堆合并的所需的最小成本
+        状态方程：dp[i][j] = min(dp[i][j],dp[i][k]+dp[k][j]+sum(i,j))  大区间的结果由小区间递推得到，因此最外一层循环是区间长度，顺序是从小到大
+        :param coins:
+        :return:
+        """
+        n = len(coins)
+        dp = [[0 for j in range(n + 1)] for i in range(n + 1)]
+        sum_coin = [0 for i in range(n + 1)]
+        for i in range(1, n + 1):
+            sum_coin[i] = sum_coin[i - 1] + coins[i - 1]
+        for length in range(2, n + 1):  # 区间长度为2到n
+            for i in range(1, n - length + 2):
+                j = i + length - 1
+                dp[i][j] = float('inf')
+                least_sum = sum_coin[j] - sum_coin[i - 1]
+                for k in range(i, j):
+                    dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] + least_sum)
+        print(dp[1][n])
+
+
+class Solution_twoColorTower:
+    """
+    双色塔
+    给红色绿色石头若干，建塔，第一层1个石头，第i层i个石头，每一层石头颜色相同，塔的层数尽可能多，问最多有几种建塔方案
+    """
+
+    def twoColerTower(self, red, green):
+        if not red or not green:
+            return 1
+        red, green = min(red, green), max(red, green)
+        dp = [0 for i in range(green + 1)]
+        totalNeed = 1
+        left, right = 0, 0
+        dp[0] = 1
+        dp[1] = 1
+        for i in range(2, int((2 * (red + green)) ** 0.5) + 1):
+            totalNeed += i
+            maxNeedA = min(totalNeed, red)
+            minNeedA = max(totalNeed - green, 0)
+            if minNeedA > maxNeedA:
+                break
+            left = minNeedA
+            right = maxNeedA
+            for j in range(i, right - 1, -1):
+                dp[j] = dp[j] + dp[j - i]
+        sum_ = 0
+        for i in range(left, right + 1):
+            sum_ += dp[i]
+        return sum_
+
+
 if __name__ == '__main__':
     # import re
     #
@@ -284,5 +345,7 @@ if __name__ == '__main__':
     # print(nums)
     # print(character)
     #
-    a = Solution_stoneMerge()
-    a.stoneMerge([2,  5, 4, 7])
+    # a = Solution_stoneMerge()
+    # a.stoneMerge([2, 5, 4, 7])
+    a = Solution_coinMerge()
+    a.mergeCoin([2, 4, 5, 7])
