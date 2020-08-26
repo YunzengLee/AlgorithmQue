@@ -364,7 +364,7 @@ class MedianofTwoSortedArrays():
             return self.findKth(A, A_start + k // 2, B, B_start, k - k // 2)  # 丢掉A的前k//2个数，去找A和B的第k-k//2个数
         else:
             return self.findKth(A, A_start, B, B_start + k // 2, k - k // 2)
-        
+
 
 if __name__ == '__main__':
     pass

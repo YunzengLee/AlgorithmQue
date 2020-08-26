@@ -28,10 +28,6 @@ class Solution2():
             prefixSum.append(sum)
         # 接下来找prefixSum里相同的两个数的下标
 
-
-
-
-
     def findCloseZeroSubarray(self):
         # 找出尽量接近0的子数组
         # 方法： 写出prefixSum数组，找里面最接近的两个数： 做个排序，就可以找出最接近的
@@ -42,7 +38,7 @@ class Solution2():
 ## 综上 遇见子数组 和 这样的关键词，基本用prefixSum
 
 #  同向双指针
-class Solution3():
+class Solution3:
     def move_zeros(self, A):
         # 将A中0移到最后
         # left指针指向列表A中非0数的下一个（也就是第一个0） # right指针不断向右遍历
