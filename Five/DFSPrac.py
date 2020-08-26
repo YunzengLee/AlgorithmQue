@@ -24,7 +24,7 @@ class Solution1():
         if cur_sum > target:  # 当当前和大于target时，就返回 这样就不会在进入下面的选数进subset的步骤
             return
         for i in range(startidx, len(candidate)):
-            if i != 0 and candidate[i] == candidate[i - 1]:  # 去重机制 跳过列表中的重复元素
+            if i != startidx and candidate[i] == candidate[i - 1]:  # 去重机制 跳过列表中的重复元素
                 # print('continue one time')
                 # print(candidate[i])
                 # print(candidate[i-1])

@@ -63,11 +63,10 @@ class Solution1():
         nodek = prev
         node1 = prev.next
         for i in range(k):
+            nodek = nodek.next
             if nodek == None:
                 return None
-            nodek = nodek.next
-        if nodek == None:
-            return None
+
         node_plus = nodek.next
         # 以上几句分别找到翻转前的 第一个节点 第k个节点以及第k+1个节点
         # 找到以后就可以放心执行reverse函数，不用管首尾节点的变化
@@ -86,7 +85,7 @@ class Solution1():
             curt = temp
 
 
-class Link_List_Node():
+class Link_List_Node:
     def __init__(self, val=None, next=None, random=None):
         self.val = val
         self.next = next
@@ -163,8 +162,9 @@ class LinkListCycle():
         if fast == None or fast.next is None:
             return None
         # 此时 fast=slow
-        # 下面这个用到是数学知识 很难看懂  背下好了
-        while head != slow.next:
+        # 下面这个用到是数学知识 很难看懂  背下好了  1    2
+                                               # 4   3
+        while head != slow:
             head = head.next
             slow = slow.next
         return head
@@ -364,9 +364,7 @@ class MedianofTwoSortedArrays():
             return self.findKth(A, A_start + k // 2, B, B_start, k - k // 2)  # 丢掉A的前k//2个数，去找A和B的第k-k//2个数
         else:
             return self.findKth(A, A_start, B, B_start + k // 2, k - k // 2)
-
-
-import queue
+        
 
 if __name__ == '__main__':
     pass

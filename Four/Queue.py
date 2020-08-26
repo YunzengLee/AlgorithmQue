@@ -30,7 +30,7 @@ class Soulution1():
 
     def flatten2(self, root):
         # 上个函数去掉for循环 就变成了BFS前序遍历
-        # 这句话说错了 不是去掉就变成前序遍历，去掉后每个节点的遍历顺序依然是与上题相同的
+        # 上面这句话说错了 不是去掉就变成前序遍历，去掉后每个节点的遍历顺序依然是与上题相同的
         # 分层遍历的目的只是为了记录一个当前层的结果 如上题的level
         res = []
         if root is None:
@@ -64,7 +64,7 @@ class GraphNode():
 
 
 class Solution2():
-    # 二叉树的序列化
+    # 二叉树的序列化  做法是对二叉树进行分层记录
     def tree_serialization(self, root):
         res = ''
         if root is None:

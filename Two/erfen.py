@@ -121,47 +121,49 @@ class Solution3():
         start = 0
         end = len(A)
         while start + 1 < end:
-           mid = (start + end) // 2
-           if A[mid] > A[mid - 1] and A[mid + 1]>A[mid]:
-               start =mid
-           elif A[mid] < A[mid - 1] and A[mid + 1]<A[mid]:
-               end = mid
-           elif A[mid] < A[mid - 1] and A[mid] < A[mid +1]:
-               start = mid
-           else:
-               return A[mid]
+            mid = (start + end) // 2
+            if A[mid] > A[mid - 1] and A[mid + 1] > A[mid]:
+                start = mid
+            elif A[mid] < A[mid - 1] and A[mid + 1] < A[mid]:
+                end = mid
+            elif A[mid] < A[mid - 1] and A[mid] < A[mid + 1]:
+                start = mid
+            else:
+                return A[mid]
         return A[start] if A[start] > A[end] else A[end]
+
+
 class Solution4():
     # 在一个切分数列A中找target
-    def find_(self,A,target):
-        length=len(A)
-        if target>=A[0]:
-            start=0
-            end=length-1
-            while start+1<end:
-                mid=(start+end)//2
-                if A[mid]<A[0]:
-                    end=mid
-                elif A[mid]<=target:
-                    start=mid
+    def find_(self, A, target):
+        length = len(A)
+        if target >= A[0]:
+            start = 0
+            end = length - 1
+            while start + 1 < end:
+                mid = (start + end) // 2
+                if A[mid] < A[0]:
+                    end = mid
+                elif A[mid] <= target:
+                    start = mid
                 else:
-                    end=mid
-            if A[start]==target:
+                    end = mid
+            if A[start] == target:
                 return start
             else:
                 return end
-        if target<=A[length-1]:
-            start=0
-            end=length-1
-            while start+1<end:
-                mid=(start+end)//2
-                if A[mid]>A[length-1]:
+        if target <= A[length - 1]:
+            start = 0
+            end = length - 1
+            while start + 1 < end:
+                mid = (start + end) // 2
+                if A[mid] > A[length - 1]:
                     start = mid
-                elif A[mid]<=target:
-                    start=mid
+                elif A[mid] <= target:
+                    start = mid
                 else:
-                    end=mid
-            if A[start]==target:
+                    end = mid
+            if A[start] == target:
                 return start
             else:
                 return end

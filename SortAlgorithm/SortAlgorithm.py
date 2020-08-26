@@ -1,8 +1,8 @@
-
 def merge_sort(nums):
-    left=0
-    right=len(nums)-1
-    return _helper(0,right,nums)
+    left = 0
+    right = len(nums) - 1
+    return _helper(0, right, nums)
+
 
 def _helper(startidx, endidx, nums):
     if startidx == endidx:
@@ -16,17 +16,19 @@ def _helper(startidx, endidx, nums):
     while left_p < len(left) and right_p < len(right):
         if left[left_p] <= right[right_p]:
             res.append(left[left_p])
-            left_p+=1
+            left_p += 1
         else:
             res.append(right[right_p])
             right_p += 1
     while right_p < len(right):
         res.append(right[right_p])
-        right_p+=1
+        right_p += 1
     while left_p < len(left):
         res.append(left[left_p])
         left_p += 1
     return res
+
+
 class MergeSort():
     # 用递归的归并排序
     def m_sort(self, arr):
@@ -159,7 +161,7 @@ def swap(arr, idx1, idx2):
 
 
 class NewMergeSort():
-    # 上面的写法每次递归都要分出两个数组，数组切分就是个新的空间，太费空间了，能不能用下标值 代替切分数组呢
+    # 上面的写法每次递归都要分出两个数组传入递归函数，数组切分就是个新的空间，太费空间了，能不能用下标值 代替切分数组呢
     def m_sort(self, arr):
         if arr is None:
             return None
@@ -199,29 +201,28 @@ class NewMergeSort():
                 i += 1
         return res
 
+
 '''非递归快排，递归用栈结构代替'''
+
+
 # 栈里保存要进行排序的起始终止idx，排序后判断基准位置是否处于起始于终止idx之间，若是，则压入两对新的起始终止idx。
 
 def fastSort_no_recursion(nums):
-    stack=[]
-    if nums is None or len(nums)<2:
+    stack = []
+    if nums is None or len(nums) < 2:
         return nums
-    left=0
-    right=len(nums)-1
+    left = 0
+    right = len(nums) - 1
 
-    stack.append((left,right))
-    while len(stack)!=0:
+    stack.append((left, right))
+    while len(stack) != 0:
         boundary = stack.pop()
-        par = partition(nums,boundary[0],boundary[1])
-        if par-1>boundary[0]:
-            stack.append((boundary[0],par-1))
-        if par+1<boundary[1]:
-            stack.append((par+1,boundary[1]))
+        par = partition(nums, boundary[0], boundary[1])
+        if par - 1 > boundary[0]:
+            stack.append((boundary[0], par - 1))
+        if par + 1 < boundary[1]:
+            stack.append((par + 1, boundary[1]))
     return nums
-
-
-
-
 
 
 if __name__ == '__main__':
