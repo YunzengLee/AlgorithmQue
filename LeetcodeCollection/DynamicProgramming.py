@@ -203,6 +203,31 @@ class Solution_mianshi_60:
             res[i] = f[n][n + i] / ((6 ** n))
         return res
 
+class Solution_leetcode718:
+    '''求两个数组的公共子数组的最大长度'''
+    def findLength(self, A, B):
+        """
+        :type A: List[int]
+        :type B: List[int]
+        :rtype: int
+        """
+        '''匹配性动归'''
+        lena = len(A)
+        lenb = len(B)
+        dp = [[0 for i in range(len(B))] for j in range(len(A))]
+        res = 0
+        for j in range(lenb):
+            dp[lena-1][j] = 1 if A[lena-1] == B[j] else 0
+            res = max(res,dp[lena-1][j])
+        for j in range(lena):
+            dp[j][lenb-1] = 1 if A[j] == B[lenb-1] else 0
+            res = max(res,dp[j][lenb-1])
+        for i in range(lena-2,-1,-1):
+            for j in range(lenb-2,-1,-1):
+                if A[i] == B[j]:
+                    dp[i][j] = dp[i+1][j+1] + 1
+                    res = max(res,dp[i][j])
+        return res
 
 # leetcode 10  正则匹配 测试中
 class Solution_xxx:
