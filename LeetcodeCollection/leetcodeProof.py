@@ -3,7 +3,25 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+'''TopK 高频元素'''
+class Solution_leet347(object):
+    def topKFrequent(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        Hash = {}
+        for i in nums:
+            Hash[i] = Hash.get(i,0)+1
+        sort = sorted(Hash.items(),key = lambda x:x[1],reverse = True)
+        return [sort[i][0] for i in range(k)]
+import functools
+def compare(x,y):
+    return x-y
+functools.cmp_to_key(compare)
 
+    ## 注意Hash的get方法用法，以及sorted函数用法
 '''leetcode 2.两数相加''' '''没有特殊算法 只是对链表的处理'''
 
 

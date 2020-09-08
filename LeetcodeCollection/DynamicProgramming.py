@@ -263,6 +263,44 @@ class Solution_xxx:
 
 
 '''背包型 '''
+class Solution_backpack:
+    def back01(self,w,v,C):
+        """
+
+        :param w: int数组，表重量
+        :param v: int数组，表价值
+        :param C: 背包的容量
+        :return:
+        """
+        n = len(w)
+        if n == 0:
+            return 0
+        dp = [[0 for _ in range(C+1)] for _ in range(n)]
+        for i in range(C+1):
+            dp[0][i] = v[0] if i>=v[0] else 0
+        for i in range(1,n):
+            for j in range(C+1):
+                dp[i][j] = dp[i-1][j]
+                if w[i]<=j:###########
+                    dp[i][j] = max(dp[i][j], v[i] + dp[i-1][j-w[i]])
+        return dp[-1][-1]
+class Solution_leet416:
+    def twoSubarr(self,arr):
+        """
+        给一个非空 正整数数组，问是否能分成和相等的两部分
+        :param arr:
+        :return:
+        """
+        s = sum(arr)/2
+        if s%2 != 0:
+            return False
+        dp = [False for _ in range(s+1)]
+        dp[0] = True
+        for num in arr:
+            for i in range(s, 0, -1):
+                if num<= i:
+                    dp[i] = dp[i-num]
+        return dp[-1]
 
 
 class Solution_stoneMerge:
