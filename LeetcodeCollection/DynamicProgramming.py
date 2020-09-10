@@ -367,6 +367,10 @@ class Solution_coinMerge:
                     dp[i][j] = min(dp[i][j], dp[i][k] + dp[k + 1][j] + least_sum)
         print(dp[1][n])
 
+'''
+lintcode 119编辑距离
+lintcode背包问题
+'''
 
 class Solution_twoColorTower:
     """
