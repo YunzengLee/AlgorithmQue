@@ -15,6 +15,17 @@ class Solution_leet739(object):
         :type T: List[int]
         :rtype: List[int]
         """
+        # stack = []
+        # res= [0 for i in range(len(T))]
+        # stack.append(0)
+        # for i in range(1,len(T)):
+        #     if stack:
+        #         while stack and T[stack[-1]] <T[i]:
+        #             idx = stack.pop()
+        #             res[idx] = i-idx
+        #     stack.append(i)
+        # return res
+        #
         res = [0 for i in range(len(T))]
         stack = []
         cur_idx = 0

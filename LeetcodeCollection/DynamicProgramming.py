@@ -75,7 +75,7 @@ def tes_t_1(s):
     maxval = float('-inf')
     for i in range(len(s) - 1, -1, -1):
 
-        if s[i] == '(':
+        if s[i] == ')':
             continue
         else:
             if i + 1 < len(s) and i + 1 + dp[i + 1] < len(s):
@@ -193,7 +193,7 @@ class Solution_mianshi_60:
             f[1][i] = 1
 
         for i in range(2, n + 1):
-            for j in range(i, 6 * n + 1):
+            for j in range(i, 6 * i + 1):
                 for k in range(1, 7):
                     if j > k:
                         f[i][j] += f[i - 1][j - k]

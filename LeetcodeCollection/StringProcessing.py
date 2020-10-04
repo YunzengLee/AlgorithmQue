@@ -11,7 +11,7 @@
 输出: "example good a"
 解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
 '''
-class Solution_mianshi_58_i(object):
+class Solution_mianshi_58_i(object):  # *****
     def reverseWords(self, s):
         """
         :type s: str
@@ -30,5 +30,14 @@ class Solution_mianshi_58_i(object):
             ans += s[0:sublen]
         return ans.strip()
     def reverseWords2(self,s):
-        l = s.split()
+        l = s.split(' ')
+        for i in l:
+            if not i:
+                l.remove(i)
+        print(l)
         return ' '.join(l[::-1])
+
+if __name__ == '__main__':
+    a=Solution_mianshi_58_i()
+    res = a.reverseWords2('ojh   ugbugy  uggy kj')
+    print(res)

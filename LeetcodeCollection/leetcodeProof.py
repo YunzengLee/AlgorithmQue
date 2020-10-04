@@ -3,7 +3,74 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+
+'''leetcode56 合并区间'''
+
+
+class Solution_leet56(object):
+    '''给出一个区间的集合，请合并所有重叠的区间。
+示例 1:
+
+输入: intervals = [[1,3],[2,6],[8,10],[15,18]]
+输出: [[1,6],[8,10],[15,18]]
+解释: 区间 [1,3] 和 [2,6] 重叠, 将它们合并为 [1,6].
+'''
+
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        if not intervals:
+            return []
+        intervals.sort()  # 将原列表排序
+        res = [intervals[0]]
+        for i in intervals:
+            last = res[-1]
+            if i[0] <= last[1]:
+                last[1] = max(i[1], last[1])
+            else:
+                res.append(list(i))
+        return res
+
+'''求数组中两个元素的最短距离'''
+class Solution_minDis:
+    def minDis(self,nums,num1,num2):
+        num1_idx = -1
+        num2_idx = -1
+        mindis = float('inf')
+        for idx in range(len(nums)):
+            if nums[idx] == num1:
+                num1_idx = idx
+                if num2_idx>=0:
+                    mindis = min(mindis,abs(num1_idx-num2_idx))
+            if nums[idx] == num2:
+                num2_idx = idx
+                if num1_idx>=0:
+                    mindis = min(mindis, abs(num1_idx - num2_idx))
+        return mindis
+
+'''三个有序数组中取交集'''
+def findCommon(array1,array2,array3):
+    i=0
+    j=0
+    k=0
+    while i<len(array1) and j<len(array2)and k<len(array3):
+        if array1[i]==array2[j]==array3[k]:
+            i+=1
+            j+=1
+            k+=1
+            print(array1[i-1])
+        elif array1[i]<array2[j]:
+            i+=1
+        elif array2[j]<array3[k]:
+            j+=1
+        else:
+            k+=1
+
 '''TopK 高频元素'''
+
+
 class Solution_leet347(object):
     def topKFrequent(self, nums, k):
         """
@@ -13,15 +80,21 @@ class Solution_leet347(object):
         """
         Hash = {}
         for i in nums:
-            Hash[i] = Hash.get(i,0)+1
-        sort = sorted(Hash.items(),key = lambda x:x[1],reverse = True)
+            Hash[i] = Hash.get(i, 0) + 1
+        sort = sorted(Hash.items(), key=lambda x: x[1], reverse=True)
         return [sort[i][0] for i in range(k)]
+
+
 import functools
-def compare(x,y):
-    return x-y
+
+
+def compare(x, y):
+    return x - y
+
+
 functools.cmp_to_key(compare)
 
-    ## 注意Hash的get方法用法，以及sorted函数用法
+## 注意Hash的get方法用法，以及sorted函数用法
 '''leetcode 2.两数相加''' '''没有特殊算法 只是对链表的处理'''
 
 
@@ -598,7 +671,7 @@ class Solution501(object):
             if cursum[0] > maxval[0]:
                 maxval[0] = cursum[0]
 
-                while len(res) != 0:
+                while res:
                     res.pop()
                 # res.clear()  这一句在leetcode上会出错啊 啥情况
                 # 绝对不能直接res=[node.val] 因为这样res就指向了一个新列表，上一层的res不会改变 一定要从原列表基础上改变
@@ -654,7 +727,7 @@ class Solution_JianZhiOffer11():
         left = 0
         right = len(num) - 1
         while left + 1 < right:
-            mid = (left + right) / 2
+            mid = (left + right) // 2
             if num[mid] < num[right]:
                 right = mid
 
@@ -748,8 +821,10 @@ class Solution_mianshi_57_ii(object):
 ['a','a','b'],改为['a','2','b'],返回长度3
 ['a','a'......'a']（包含12个'a'） 改为['a','1','2'],返回长度3
 '''
+
+
 def test(chars):
-    if not chars or len(chars) <=1:
+    if not chars or len(chars) <= 1:
         return len(chars)
     write = 0
     read = 1
@@ -917,26 +992,37 @@ class Solution1013(object):
         # 一开始想用双指针，找到使和相等的三个部分的分界点，时间复杂度为（n^2）
         # 但是，三等分数组必定每个部分的和为sum/3，所以只要找和为sum/3的分界点即可
         # 第二点：当指针从左开始向右走，并累加，当和为sum/3的时候，指针就是第一分界点，接下来找第二分界点即可，不必考虑下一个第一分界点。不好描述，自己想想为什么
-        num_sum = sum(A)
-        sum_part = num_sum // 3
-        if num_sum % 3 != 0:
-            return False
-
-        point = 0
+        part = 0
         cur_sum = 0
-        while point < len(A) - 2:
-            cur_sum += A[point]
-            point += 1
-            if cur_sum == sum_part:
-                break
-        if cur_sum != sum_part:
-            return False
-        while point < len(A) - 1:
-            cur_sum += A[point]
-            point += 1
-            if cur_sum == sum_part * 2:
-                return True
+        for num in A:
+            cur_sum += num
+            if cur_sum == sum(A) / 3:
+                part += 1
+                cur_sum = 0
+        if part == 3:
+            return True
         return False
+
+        # num_sum = sum(A)
+        # sum_part = num_sum // 3
+        # if num_sum % 3 != 0:
+        #     return False
+        #
+        # point = 0
+        # cur_sum = 0
+        # while point < len(A) - 2:
+        #     cur_sum += A[point]
+        #     point += 1
+        #     if cur_sum == sum_part:
+        #         break
+        # if cur_sum != sum_part:
+        #     return False
+        # while point < len(A) - 1:
+        #     cur_sum += A[point]
+        #     point += 1
+        #     if cur_sum == sum_part * 2:
+        #         return True
+        # return False
 
 
 '''leetcode 面试30/155最小栈'''
@@ -1381,20 +1467,12 @@ class Solution_mianshi_33(object):
             return True
         rootval = postorder[endidx]
         boundary = startidx
-        # for boundary in range(startidx, endidx):
-        #     if postorder[boundary] > rootval:
-        #         break
         while postorder[boundary] < rootval:  # ##############
             boundary += 1
         i = boundary
         while postorder[i] > rootval:
             i += 1
 
-        # if postorder[boundary]<rootval:
-        #     return True
-        # for point in range(boundary, endidx):
-        #     if postorder[point]<rootval:
-        #         return False
         return i == endidx and self.verifyHelper(startidx, boundary - 1, postorder) and self.verifyHelper(boundary,
                                                                                                           endidx - 1,
                                                                                                           postorder)
@@ -1413,7 +1491,7 @@ class Solution_mianshi_68_i:
         # maxval = max(p.val,q.val)
         # if root.val >= minval and root.val<=maxval:
         #     return root
-        # elif root.val>minval:
+        # elif root.val>maxval:
         #     return self.lowestCommonAncestor(root.left,p,q)
         # else:
         #     return self.lowestCommonAncestor(root.right,p,q)
@@ -1591,29 +1669,30 @@ if __name__ == '__main__':
     heapq.heappush(res, 1)
     print(res)
 
-    def test(arr,k):
-        if len(arr)<=k:
+
+    def test(arr, k):
+        if len(arr) <= k:
             return arr
         start = 0
         end = len(arr) - 1
-        def fastsort(start,end,arr,k):
+
+        def fastsort(start, end, arr, k):
             left = start
             right = end
             key = arr[start]
             while left < right:
-                while left< right and arr[right]>=key:
-                    right -=1
+                while left < right and arr[right] >= key:
+                    right -= 1
                 arr[left] = arr[right]
-                while left<right and arr[left] <= key:
-                    left+=1
+                while left < right and arr[left] <= key:
+                    left += 1
                 arr[right] = arr[left]
             arr[left] = key
             if left + 1 == k:
-                return arr[:left+1]
-            elif left+1<k:
-                return fastsort(left+1,end,arr,k)
+                return arr[:left + 1]
+            elif left + 1 < k:
+                return fastsort(left + 1, end, arr, k)
             else:
-                return fastsort(start,left-1,arr,k)
-        return fastsort(start,end,arr,k)
+                return fastsort(start, left - 1, arr, k)
 
-
+        return fastsort(start, end, arr, k)

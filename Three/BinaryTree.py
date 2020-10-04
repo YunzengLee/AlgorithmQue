@@ -482,6 +482,10 @@ def a2(list2):
 
 
 if __name__ == '__main__':
+    a=Solution()
+    b = None
+    res = a or b
+    print(type(res))
     a = [1, 2, 3]
     # print(a)
     print(a)
