@@ -30,7 +30,16 @@ if __name__ =='__main__':
     # a=Solution1()
     # res=a.make_cancellation('112','2')
     # print(res)
-    c=[(1,2),(3,4),(5,6)]
-    d=list(zip(*c))
-    print(d)
+    a = [1,2,3]
+    b = map(lambda x:x+1, range(6))
+    for i in a:
+        if i in b:
+            print(i)
+    a=[1,2,4]
+    b=[3,4,5]
+    a=a+b
+    print(a)
+    c=[5,6,7]
+    c.extend(b)
+    print(c)
     pass

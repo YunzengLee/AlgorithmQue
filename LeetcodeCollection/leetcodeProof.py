@@ -185,6 +185,21 @@ class Solution3(object):  # ###############
                 hash.remove(s[startidx])
                 startidx += 1
         return maxlength
+    def test(self,string):
+        s=set()
+        right = 0
+        left = 0
+        maxlen = 0
+        while right<len(string):
+            if string[right] not in s:
+                s.add(string[right])
+                right+=1
+                maxlen=max(maxlen,right-left)
+            else:
+                while string[right] in s:
+                    s.remove(string[left])
+                    left+=1
+        return maxlen
 
 
 '''leetcode 148.排序链表''' '''对链表进行归并排序 时间O(nlogn)空间O(1)'''
@@ -1696,3 +1711,8 @@ if __name__ == '__main__':
                 return fastsort(start, left - 1, arr, k)
 
         return fastsort(start, end, arr, k)
+if __name__ == '__main__':
+    s=0x10
+    a = 0b10
+    c=0o10
+    print(a,c,s)

@@ -277,7 +277,7 @@ class Solution_backpack:
             return 0
         dp = [[0 for _ in range(C+1)] for _ in range(n)]
         for i in range(C+1):
-            dp[0][i] = v[0] if i>=v[0] else 0
+            dp[0][i] = v[0] if i>=w[0] else 0
         for i in range(1,n):
             for j in range(C+1):
                 dp[i][j] = dp[i-1][j]

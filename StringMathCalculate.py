@@ -71,6 +71,24 @@ def calculate(string):
             stack_helper.append(res)
     # 最后辅助栈只会剩余一个元素，就是最终结果
     return stack_helper[0]
+if __name__=='__main__':
+    pass
+    print('')
+    # a=[1,23]
+    # b=a
+    # b.extend([1,2,3])
+    # print(a,b)
+    # with open('./Java/MyLruCache.java',encoding='utf8') as f:
+    #     a=f.readline()
+    # #     # print(a)
+    #     while(a):
+    #         print(a.strip())
+    #         a=f.readline()
 
-res=calculate('1*2-2*(3+4)') # 后缀表达式为 ['1', '2', '+', '2', '3', '4', '+', '*', '-']
-print(res)
+
+# s=0x10
+# a = 0b10
+# c=0o10
+# print(a,c,s)
+# res=calculate('1*2-2*(3+4)') # 后缀表达式为 ['1', '2', '+', '2', '3', '4', '+', '*', '-']
+# print(res)

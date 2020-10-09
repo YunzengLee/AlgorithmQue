@@ -98,12 +98,14 @@ class Solution5():
         if left is not None and right is not None:
             # 两个子树都不为空 说明各包含一个节点
             return root
-        if left is not None:
-            # 说明两个节点都在左子树，返回的就是LCA值，下面同理
-            return left
-        if right is not None:
-            return right
-        return None
+        else:
+            return left or right
+        # if left is not None:
+        #     # 说明两个节点都在左子树，返回的就是LCA值，下面同理
+        #     return left
+        # if right is not None:
+        #     return right
+        # return None
 
     def LowestCommonAncestor2(self, root, node1, node2):
         # 如果该树里可能只有一个节点呢?
